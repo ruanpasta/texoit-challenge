@@ -1,10 +1,10 @@
 import { LinksFunction } from "@remix-run/node";
 import style from "./style.css";
 
-export default function NavbarComponent() {
-  return <nav className="navbar">
+export default function TopBarComponent() {
+  return <div className="top-bar">
     <h3>Frontend React Test</h3>
-  </nav>;
+  </div>;
 }
 
 export const links: LinksFunction = () => [{ rel: "stylesheet", href: style }];

@@ -1,5 +1,5 @@
-import { cssBundleHref } from "@remix-run/css-bundle";
-import type { LinksFunction } from "@remix-run/node";
+import { cssBundleHref } from '@remix-run/css-bundle';
+import type { LinksFunction } from '@remix-run/node';
 import {
   Links,
   LiveReload,
@@ -7,18 +7,28 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-} from "@remix-run/react";
+} from '@remix-run/react';
 
-import NavbarComponent, { links as NavbarComponentLinks } from "./components/navbar";
-import globalStyles from "./styles/global.styles.css";
+import { Menu } from './components/menu';
+import TopBarComponent, {
+  links as TopBarComponentLinks,
+} from './components/top-bar';
+import globalStyles from './styles/global.styles.css';
 
 export const links: LinksFunction = () => [
-  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
-  ...[{ rel: "stylesheet", href: globalStyles }],
-  ...NavbarComponentLinks()
+  ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
+  ...[{ rel: 'stylesheet', href: globalStyles }],
+  ...TopBarComponentLinks(),
+  ...Menu.RootLinks(),
+  ...Menu.ItemLinks(),
 ];
 
 export default function App() {
+  const menus = [
+    { label: 'Dashboard', to: '/dashboard' },
+    { label: 'List', to: '/list' },
+  ];
+
   return (
     <html lang="en">
       <head>
@@ -28,8 +38,18 @@ export default function App() {
         <Links />
       </head>
       <body className="light">
-        <NavbarComponent />
-        <Outlet />
+        <TopBarComponent />
+
+        <div className="root__content">
+          <Menu.Root>
+            {menus.map(menu => (
+              <Menu.Item key={menu.to} label={menu.label} to={menu.to} />
+            ))}
+          </Menu.Root>
+
+          <Outlet />
+        </div>
+
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

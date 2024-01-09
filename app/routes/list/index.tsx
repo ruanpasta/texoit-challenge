@@ -4,7 +4,7 @@ import style from './style.css';
 export default function DashboardPage() {
     return (
         <>
-            <h2 className="dashboard">DashboardPage</h2>
+            <h2 className="dashboard">List page</h2>
         </>
     )
 }

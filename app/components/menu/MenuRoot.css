@@ -1,0 +1,16 @@
+nav {
+  height: 100%;
+  background-color: var(--background-secondary);
+  padding: 1rem;
+}
+
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+ul {
+  display: grid;
+  gap: 0.5rem;
+}

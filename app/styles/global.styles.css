@@ -29,10 +29,23 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 400;
 }
 
-body {
-  box-sizing: border-box;
+html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
   background-color: var(--background-primary);
   font-family: sans-serif;
+}
+
+.root__content {
+  height: calc(100% - 54px);
+  width: auto;
+  display: flex;
 }

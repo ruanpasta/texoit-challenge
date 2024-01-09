@@ -1,7 +1,8 @@
-.navbar {
+.top-bar {
   background-color: var(--background-nav);
   color: var(--font-contrast);
   width: 100%;
+  height: auto;
   font-weight: 600;
   padding: 1rem;
 }

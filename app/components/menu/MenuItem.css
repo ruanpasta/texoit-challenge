@@ -1,0 +1,9 @@
+.menu__item a {
+  text-decoration: none;
+  color: var(--font-primary);
+}
+
+.menu__item a:hover,
+.menu__item a.active {
+  color: var(--button-primary);
+}
