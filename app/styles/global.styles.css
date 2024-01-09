@@ -1,0 +1,38 @@
+:root {
+  --background-primary: #fff;
+  --background-secondary: #f8f9fa;
+  --button-primary: #007ad9;
+  --button-secondary: #8c9ab3;
+  --table-header: #f4f4f4;
+  --table-row: #f9f9f9;
+  --font-primary: #1d1d2a;
+  --font-disabled: #bfbfc1;
+  --font-contrast: #f8f5ec;
+  --background-nav: #343a40;
+}
+
+body.dark {
+  --background-primary: #1d1d2a;
+  --background-secondary: #1f2125;
+  --button-primary: #007ad9;
+  --button-secondary: #8c9ab3;
+  --table-header: #1e1e1e;
+  --table-row: #232323;
+  --font-primary: #fff;
+  --font-disabled: #bfbfc1;
+  --font-contrast: #1d1d2a;
+  --background-nav: #343a40;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 400;
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-primary);
+  font-family: sans-serif;
+}

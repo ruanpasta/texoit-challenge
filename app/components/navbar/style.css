@@ -1,0 +1,7 @@
+.navbar {
+  background-color: var(--background-nav);
+  color: var(--font-contrast);
+  width: 100%;
+  font-weight: 600;
+  padding: 1rem;
+}
