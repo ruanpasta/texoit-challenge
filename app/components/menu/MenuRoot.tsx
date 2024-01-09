@@ -1,7 +1,7 @@
 import { LinksFunction } from "@remix-run/node";
 import style from './MenuRoot.css';
 
-export default function RootComponent({ children }: { children: JSX.Element[] | string }) {
+export default function MenuRootComponent({ children }: { children: JSX.Element[] | string }) {
   return (
     <nav data-testid="menu">
       <ul>

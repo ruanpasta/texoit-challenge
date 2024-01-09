@@ -1,0 +1,12 @@
+.card {
+  box-shadow: var(--box-shadow);
+  border-radius: 0.25rem;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.card h3 {
+  font-weight: 700;
+}
