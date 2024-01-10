@@ -6,6 +6,6 @@ export interface ProducerData {
 }
 
 export interface ProducersIntervalWin {
-  min: ProducerData;
-  max: ProducerData;
+  min: ProducerData[];
+  max: ProducerData[];
 }

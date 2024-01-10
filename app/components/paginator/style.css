@@ -1,0 +1,10 @@
+.paginator__item {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--button-primary);
+}
+
+.paginator__item:hover {
+  color: var(--button-secondary)
+}

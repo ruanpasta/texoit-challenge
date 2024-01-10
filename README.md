@@ -1,38 +1,31 @@
-# Welcome to Remix!
+# Bem vindo ao desafio Frontend React da Texo IT de Ruan Pasta
 
-- [Remix Docs](https://remix.run/docs)
+Este desafio foi desenvolvido em Remix React Framework!
+O Remix eh um recente framework de React que busca melhorar a performance, qualdidade de navegacao dos usuarios e mais praticidade no desevolvimento, entregando algumas funiconalidades que simplicam e facilitam a vida do desenvolvedor.
 
-## Development
+Diferente do NextJS e outros frameworks, soh eh possivel atuar com SSR no Remix, nao eh possivel usar o CSR.
 
-From your terminal:
+Optei pelo Remix por ser uma das sugestoes da propria documentacao do React, ja que o CRA (create-react-app) esta deprecado.
 
-```sh
-npm run dev
-```
+Para trazer uma experiencia mais completa, todos os componentes foram desenvolvidos dentro do projeto, sem utilizar bibliotecas externas.
 
-This starts your app in development mode, rebuilding assets on file changes.
+## Rodando o projeto
 
-## Deployment
+Primeiramente instale as dependecias do projeto.
+Recomendasse usar o npm.
 
-First, build your app for production:
+```npm install```
 
-```sh
-npm run build
-```
+Apos isso, ja pode rodar o projeto atravez do comando:
 
-Then run the app in production mode:
+```npm run dev```
 
-```sh
-npm start
-```
+Para rodar os testes use:
 
-Now you'll need to pick a host to deploy it to.
+```npm run test```
 
-### DIY
+Por padrao o projeto vai rodar na url: `http://localhost:3000/`
 
-If you're familiar with deploying node applications, the built-in Remix app server is production-ready.
 
-Make sure to deploy the output of `remix build`
-
-- `build/`
-- `public/build/`
+## EasterEgg
+Alterando a classe de light para dark na tag <body> do arquivo `root.ts` da pra ter previa do Dark mode. Precisa melhorar a paleta, mas ta la. hahah

@@ -9,91 +9,40 @@ import style from './style.css';
 import MovieWinnersByYear from '~/business-components/movie-winners-by-year';
 import ProducersTable from '~/business-components/producers-table';
 import StudiosCountCard from '~/business-components/studios-win-count';
-import { getEnvironment } from '~/environment';
 import { MovieByYear } from '~/models/MovieWinnerByYear';
 import { ProducerData } from '~/models/ProducersIntervalWin';
 import { StudioWinCount } from '~/models/StudiosWinCount';
 import { WinnersByYear } from '~/models/WinnersByYear';
-
-const environment = getEnvironment();
-
-const getWinnersByYear = async (): Promise<{ years: WinnersByYear }> => {
-  try {
-    const winnersByYearResponse = await fetch(
-      `${environment.apiMoviesUrl}?projection=years-with-multiple-winners`
-    );
-    const winnersByYear = await winnersByYearResponse.json();
-    return winnersByYear;
-  } catch {
-    return { years: {} } as { years: WinnersByYear };
-  }
-};
-
-const getStudioWinCount = async (): Promise<{ studios: StudioWinCount }> => {
-  try {
-    const studiosWinCountResponse = await fetch(
-      `${environment.apiMoviesUrl}?projection=studios-with-win-count`
-    );
-    const studiosWinCount = await studiosWinCountResponse.json();
-    return studiosWinCount;
-  } catch {
-    return { studios: {} } as { studios: StudioWinCount };
-  }
-};
-
-interface ProducersData {
-  min: ProducerData[];
-  max: ProducerData[];
-}
-
-const getProducersData = async (): Promise<ProducersData> => {
-  try {
-    const producersIntervalsResponse = await fetch(
-      `${environment.apiMoviesUrl}?projection=max-min-win-interval-for-producers`
-    );
-    const producersIntervals = await producersIntervalsResponse.json();
-    return producersIntervals;
-  } catch {
-    return { } as ProducersData;
-  }
-};
-
-interface FindWinnerMovieByYearResponse {
-  yearParam: number;
-  movieByYear: MovieByYear
-}
-
-const findMovieByYear = async (request: Request): Promise<FindWinnerMovieByYearResponse> => {
-  try {
-    const url = new URL(request.url);
-    const yearParam = Number(url.searchParams.get('year'));
-    const winnerMovieByYearResponse = await fetch(
-      `${environment.apiMoviesUrl}?winner=true&year=${yearParam}`
-    );
-    const winnerMovieByYear = await winnerMovieByYearResponse.json();
-    return {
-      yearParam,
-      movieByYear: winnerMovieByYear?.length ? winnerMovieByYear[0] : {}
-    };
-  } catch {
-    return { } as FindWinnerMovieByYearResponse;
-  }
-};
+import { DashboardState, dashboardState } from '~/store/dashboard';
+import FindMovieByYear from '~/use-cases/findMovieByYear';
+import GetProducersData from '~/use-cases/getProducersData';
+import GetStudioWinCount from '~/use-cases/getStudioWinCount';
+import GetWinnerByYear from '~/use-cases/getWinnersByYear';
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const years = await getWinnersByYear();
-  const sudios = await getStudioWinCount();
-  const producers = await getProducersData();
-  const movieByYearResponse = await findMovieByYear(request)
+  const getMovieByYear = async () => {
+    const movieByYearResponse = await new FindMovieByYear().execute(request);
+    return {
+      movieByYear: movieByYearResponse.movieByYear,
+      yearParam: movieByYearResponse.yearParam,
+    };
+  };
 
+  const getDashboardData = async () => {
+    const years = await new GetWinnerByYear().execute();
+    const studios = await new GetStudioWinCount().execute();
+    const producers = await new GetProducersData().execute();
+    return { ...years, ...studios, producers };
+  };
 
-  return json({
-    ...years,
-    ...sudios,
-    ...{ producers },
-    ...{ movieByYear: movieByYearResponse.movieByYear },
-    yearParam: movieByYearResponse.yearParam
-  });
+  const movieByYearData = await getMovieByYear();
+  const dashboardData = dashboardState.value.years
+    ? { ...dashboardState.value, ...movieByYearData }
+    :  {...await getDashboardData(), ...movieByYearData };
+
+  dashboardState.value = { ...dashboardData } as DashboardState;
+
+  return json(dashboardData);
 };
 
 export default function DashboardPage() {
@@ -102,7 +51,7 @@ export default function DashboardPage() {
     studios: studiosWinCount,
     producers: producersData,
     movieByYear,
-    yearParam
+    yearParam,
   } = useLoaderData<typeof loader>();
   return (
     <main className="dashboard">
@@ -118,20 +67,31 @@ export default function DashboardPage() {
         <CardComponent title="Producers with longest and shortest interval between wins">
           <ProducersTable
             subTitle="Maximum"
-            producerData={producersData?.max[0] || {}}
+            producerData={
+              producersData?.max[0] || ({} as unknown as ProducerData)
+            }
           />
           <ProducersTable
             subTitle="Minimum"
-            producerData={producersData?.min[0] || {}}
+            producerData={
+              producersData?.min[0] || ({} as unknown as ProducerData)
+            }
           />
         </CardComponent>
         <CardComponent title="List movie winners by year">
           <Form method="get">
-            <input type="number" name="year" defaultValue={yearParam} placeholder='Search by year' />
+            <input
+              type="number"
+              name="year"
+              defaultValue={yearParam}
+              placeholder="Search by year"
+            />
 
             <button type="submit">Search</button>
           </Form>
-          <MovieWinnersByYear movieByYear={movieByYear as unknown as MovieByYear} />
+          <MovieWinnersByYear
+            movieByYear={movieByYear as unknown as MovieByYear}
+          />
         </CardComponent>
       </div>
     </main>
