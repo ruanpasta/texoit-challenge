@@ -28,4 +28,4 @@ Por padrao o projeto vai rodar na url: `http://localhost:3000/`
 
 
 ## EasterEgg
-Alterando a classe de light para dark na tag <body> do arquivo `root.ts` da pra ter previa do Dark mode. Precisa melhorar a paleta, mas ta la. hahah
+Alterando a classe de light para dark na tag < body > do arquivo `root.ts` da pra ter previa do Dark mode. Precisa melhorar a paleta, mas ta la. hahah
