@@ -1,9 +1,9 @@
 import { LinksFunction } from "@remix-run/node";
 import style from "./style.css";
 
-export default function TopBarComponent() {
+export default function TopBarComponent({ title }: { title: string }) {
   return <div className="top-bar">
-    <h3>Frontend React Test</h3>
+    <h3>{title}</h3>
   </div>;
 }
 

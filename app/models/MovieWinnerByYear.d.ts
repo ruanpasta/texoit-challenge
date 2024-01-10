@@ -1,8 +1,3 @@
-export interface MovieByYear {
-  id: number;
-  year: number;
-  title: string;
-  studios: string[];
-  producers: string[];
-  winner: boolean;
-}
+import { Movie } from "./Movie";
+
+export interface MovieByYear extends Movie {}

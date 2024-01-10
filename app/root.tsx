@@ -38,7 +38,7 @@ export default function App() {
         <Links />
       </head>
       <body className="light">
-        <TopBarComponent />
+        <TopBarComponent title='Frontend React Test' />
 
         <div className="root__content">
           <Menu.Root>

@@ -1,5 +1,5 @@
 import { LinksFunction } from '@remix-run/node';
-import CardComponent, { links as CardLinks } from '~/components/card';
+import CardComponent from '~/components/card';
 import { Table } from '~/components/table';
 import { StudioWinCount } from '~/models/StudiosWinCount';
 
@@ -34,6 +34,5 @@ export default function StudiosCountCard({ studiosWinCount = [] }: Props) {
 }
 
 export const links: LinksFunction = () => [
-  ...CardLinks(),
   ...Table.TableLinks(),
 ];

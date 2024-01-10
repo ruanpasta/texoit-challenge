@@ -1,5 +1,4 @@
 import { LinksFunction } from '@remix-run/node';
-import { links as CardLinks } from '~/components/card';
 import { Table } from '~/components/table';
 import { ProducerData } from '~/models/ProducersIntervalWin';
 
@@ -34,6 +33,5 @@ export default function ProducersTable({ producerData, subTitle }: Props) {
 }
 
 export const links: LinksFunction = () => [
-  ...CardLinks(),
   ...Table.TableLinks(),
 ];

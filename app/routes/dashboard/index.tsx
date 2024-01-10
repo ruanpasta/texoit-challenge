@@ -3,7 +3,7 @@ import { Form, useLoaderData } from '@remix-run/react';
 import MultipleWinnersCard, {
   links as MultipleWinnersCardLinks,
 } from '~/business-components/multiple-winners';
-import CardComponent from '~/components/card';
+import CardComponent, { links as CardLinks } from '~/components/card';
 import style from './style.css';
 
 import MovieWinnersByYear from '~/business-components/movie-winners-by-year';
@@ -105,7 +105,7 @@ export default function DashboardPage() {
     yearParam
   } = useLoaderData<typeof loader>();
   return (
-    <div className="dashboard">
+    <main className="dashboard">
       <div className="dashboard__cards">
         <MultipleWinnersCard
           multipleWinnersByYear={
@@ -127,18 +127,19 @@ export default function DashboardPage() {
         </CardComponent>
         <CardComponent title="List movie winners by year">
           <Form method="get">
-            <input type="number" name="year" defaultValue={yearParam} />
+            <input type="number" name="year" defaultValue={yearParam} placeholder='Search by year' />
 
             <button type="submit">Search</button>
           </Form>
           <MovieWinnersByYear movieByYear={movieByYear as unknown as MovieByYear} />
         </CardComponent>
       </div>
-    </div>
+    </main>
   );
 }
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: style },
+  ...CardLinks(),
   ...MultipleWinnersCardLinks(),
 ];

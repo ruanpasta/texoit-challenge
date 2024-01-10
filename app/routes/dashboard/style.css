@@ -11,7 +11,13 @@
 
 @media (max-width: 850px) {
   .dashboard__cards {
-      grid-template-columns: 1fr;
-      padding: 1rem;
+    grid-template-columns: 1fr;
+    padding: 1rem;
   }
 }
+
+form {
+  display: flex;
+  gap: 1rem;
+}
+

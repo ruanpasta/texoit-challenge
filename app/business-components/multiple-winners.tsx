@@ -1,5 +1,5 @@
 import { LinksFunction } from '@remix-run/node';
-import CardComponent, { links as CardLinks } from '~/components/card';
+import CardComponent from '~/components/card';
 import { Table } from '~/components/table';
 import { WinnersByYear } from '~/models/WinnersByYear';
 
@@ -33,6 +33,5 @@ export default function MultipleWinnersCard({ multipleWinnersByYear = [] }: Prop
 }
 
 export const links: LinksFunction = () => [
-  ...CardLinks(),
   ...Table.TableLinks(),
 ];

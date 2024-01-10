@@ -1,8 +1,9 @@
 import { LinksFunction } from '@remix-run/node';
+import { ReactNode } from 'react';
 import style from './styles.css';
 
 interface Props {
-  children: JSX.Element | JSX.Element[] | string;
+  children: ReactNode;
   title: string;
 }
 

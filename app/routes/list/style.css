@@ -1,0 +1,9 @@
+.list {
+  padding: 1rem;
+  width: 100%;
+}
+
+.list__column-input input,
+.list__column-input select {
+  margin-top: 0.5rem;
+}
